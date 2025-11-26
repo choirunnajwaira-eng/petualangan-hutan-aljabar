@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ringkasan Materi</title>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background-image: url('forest.svg'); /* ganti dengan gambar hutan kamu */
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+    }
+
+    .container {
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 20px;
+        background: rgba(0, 0, 0, 0.45);
+        backdrop-filter: blur(6px);
+        border-radius: 15px;
+        color: #fff;
+        box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    }
+
+    h1, h2 {
+        text-align: center;
+        margin-bottom: 15px;
+    }
+
+    h2 {
+        margin-top: 25px;
+        color: #ffd166;
+    }
+
+    p, li {
+        line-height: 1.6;
+        font-size: 16px;
+    }
+
+    ul {
+        padding-left: 20px;
+    }
+
+    @media(max-width: 600px){
+        .container {
+            margin: 20px;
+            padding: 15px;
+        }
+        p, li {
+            font-size: 14px;
+        }
+    }
+
+    /* Tombol Kembali */
+   .btn-group {
+    display:flex;
+    justify-content:center;
+    gap:16px;
+    margin-top:24px;
+    flex-wrap:wrap;
+  }
+    button {
+    background:linear-gradient(90deg,var(--accent),var(--accent-2));
+    color:white;
+    border:none;
+    padding:10px 22px;
+    border-radius:8px;
+    font-size:16px;
+    cursor:pointer;
+    font-weight:600;
+    box-shadow:0 6px 20px rgba(16,163,74,0.1);
+    transition:transform .2s;
+  }
+
+  button:hover {
+    transform:translateY(-2px);
+  }
+
+  .secondary {
+    background:#16a34a;
+    color:var(#f5fbf7);
+    border:2px solid var(--accent);
+  }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+     <h2>Ringkasan Materi</h2>
+
+      <p><b>Bentuk Aljabar</b> adalah ekspresi matematika yang mengandung variabel dan konstanta.</p>
+      <ul>
+        <li>Contoh: 3x + 2, 7y - 9, 2a + 5</li>
+        <li><b>Variabel</b>: huruf seperti x, y, a</li>
+        <li><b>Koefisien</b>: angka di depan variabel</li>
+        <li><b>Konstanta</b>: angka tanpa variabel</li>
+      </ul>
+
+      <h3>Operasi pada Bentuk Aljabar:</h3>
+      <ul>
+        <li><b>Penjumlahan</b>: 3x + 2x = <b>5x</b></li>
+        <li><b>Pengurangan</b>: 8y - 3y = <b>5y</b></li>
+        <li><b>Perkalian</b>: 2 × 4x = <b>8x</b></li>
+        <li><b>Suku Sejenis</b>: suku yang memiliki variabel & pangkat sama</li>
+      </ul>
+</div>
+
+<!-- Tombol Kembali -->
+<div class="btn-group">
+  <button class="secondary" onclick="history.back()">Kembali</button>
+</div>
+</body>
+</html>

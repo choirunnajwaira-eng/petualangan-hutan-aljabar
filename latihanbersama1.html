@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Latihan Bersama — Petualangan Hutan Aljabar</title>
+  <style>
+    :root{
+      --card:#ffffff;
+      --accent:#16a34a;
+      --muted:#6b7280;
+    }
+    *{box-sizing:border-box;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;}
+    body{
+      margin:0;
+      height:100vh;
+      background: url('forest.svg') center/cover no-repeat;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      color:#04272b;
+    }
+    .container{
+      background: rgba(255,255,255,0.88);
+      backdrop-filter: blur(6px);
+      border-radius: 16px;
+      padding: 24px;
+      width: 90%;
+      max-width: 420px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+    h1{
+      text-align:center;
+      color: var(--accent);
+      margin-bottom: 20px;
+      font-size: 1.4rem;
+    }
+    .card{
+      background: var(--card);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 18px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+      border:1px solid rgba(0,0,0,0.05);
+    }
+    .q{
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+    input[type="text"]{
+      width:100%;
+      padding:8px;
+      border-radius:8px;
+      border:1px solid rgba(0,0,0,0.1);
+      margin-bottom:8px;
+    }
+    .btn{
+      background:linear-gradient(90deg,#16a34a,#10b981);
+      color:white;
+      border:none;
+      padding:8px 12px;
+      border-radius:8px;
+      cursor:pointer;
+      font-weight:600;
+      margin-right:6px;
+      transition:0.3s;
+    }
+    .btn:hover{
+      transform:scale(1.05);
+      background:#15803d;
+    }
+    .feedback{
+      margin-top:6px;
+      font-weight:600;
+      font-size:0.9rem;
+    }
+    .small{color:var(--muted);}
+    .btn-kembali-sticky {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background-color: #16a34a;
+      color: white;
+      padding: 10px 18px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .small{color:var(--muted);}
+    .btn-selanjutnya-sticky {
+      position: fixed;
+      bottom: 20px;
+      right: 40px;
+      background-color: #16a34a;
+      color: white;
+      padding: 10px 18px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <button onclick="window.location.href='index1.html'" class="btn-kembali-sticky">⬅️ Kembali</button>
+  <button onclick="window.location.href='kuis1.html'" class="btn-selanjutnya-sticky">Siap Kuis</button>
+
+  <div class="container">
+    <h1>🌿 Latihan Bersama</h1>
+
+    <!-- Latihan Cepat -->
+    <div class="card">
+      <div class="q">Tentukan hasil dari (3x + y) + (10x + 4y)!</div>
+      <input id="ans1" type="text" placeholder="Tulis jawabanmu di sini..." />
+      <div>
+        <button class="btn" onclick="check1()">Cek</button>
+        <button class="btn" style="background:#d1fae5;color:#065f46" onclick="showHint(1)">Hint</button>
+      </div>
+      <div id="fb1" class="feedback"></div>
+    </div>
+
+    <!-- Soal Kontekstual -->
+    <div class="card">
+      <div class="q">Pak Budi memiliki papan kayu sepanjang 11 meter. Ia memotong 9 meter untuk rak buku. Jika panjang kayu dinyatakan dengan variabel y, berapa panjang papan kayu yang tersisa?</div>
+      <input id="ans2" type="text" placeholder="Tulis jawabanmu..." />
+      <div>
+        <button class="btn" onclick="check2()">Cek</button>
+        <button class="btn" style="background:#d1fae5;color:#065f46" onclick="showHint(2)">Hint</button>
+      </div>
+      <div id="fb2" class="feedback"></div>
+    </div>
+  </div>
+
+  <script>
+    function norm(s){return s.replace(/\s+/g,'').toLowerCase();}
+
+    function check1(){
+      const val=document.getElementById('ans1').value;
+      const fb=document.getElementById('fb1');
+      if(!val){fb.textContent='Isi dulu jawabannya.';fb.style.color='gray';return;}
+      if(norm(val)==='13x+5y'){
+        fb.textContent='✅ Benar! Hasilnya 13x + 5y.';
+        fb.style.color='green';
+      }else{
+        fb.textContent='❌ Coba lagi, jumlahkan koefisien yang sejenis.';
+        fb.style.color='crimson';
+      }
+    }
+
+    function check2(){
+      const val=document.getElementById('ans2').value;
+      const fb=document.getElementById('fb2');
+      if(!val){fb.textContent='Isi dulu jawabannya.';fb.style.color='gray';return;}
+      if(norm(val)==='2y'){
+        fb.textContent='✅ Benar! 11y - 9y = 2y.';
+        fb.style.color='green';
+      }else{
+        fb.textContent='❌ Kurangi angka di depan y (11 - 9).';
+        fb.style.color='crimson';
+      }
+    }
+
+    function showHint(num){
+      const fb = document.getElementById('fb'+num);
+      if(num===1) fb.textContent = 'Hint: tambahkan angka x dengan x dan y dengan y.';
+      if(num===2) fb.textContent = 'Hint: kurangkan panjang kayu dengan rumus 11y - 9y.';
+      fb.style.color = '#065f46';
+    }
+
+  </script>
+</body>
+</html>

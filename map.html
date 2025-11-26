@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Peta Petualangan Hutan Aljabar</title>
+<style>
+  body{
+    margin:0;
+    height:100vh;
+    overflow:hidden;
+    font-family:'Poppins',sans-serif;
+    background: url('forest.svg') center/cover no-repeat;
+    position:relative;
+  }
+  h1{
+    color:#ecfdf5;
+    text-align:center;
+    margin:18px 0;
+    text-shadow:0 3px 8px rgba(0,0,0,0.4);
+  }
+
+  /* animasi daun */
+  .leaf{
+    position:absolute;
+    width:40px;
+    height:40px;
+    background:url('https://cdn-icons-png.flaticon.com/512/616/616408.png') center/contain no-repeat;
+    opacity:0.8;
+    animation:fall 10s linear infinite;
+  }
+  @keyframes fall{
+    0%{transform:translateY(-10vh) rotate(0deg);}
+    100%{transform:translateY(110vh) rotate(360deg);}
+  }
+
+  .map{
+    position:relative;
+    width:100%;
+    height:80vh;
+  }
+
+  .level{
+    position:absolute;
+    background:rgba(255,255,255,0.9);
+    border-radius:50%;
+    width:70px;
+    height:70px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-weight:700;
+    font-size:1.2rem;
+    color:#065f46;
+    box-shadow:0 4px 12px rgba(0,0,0,0.2);
+    cursor:pointer;
+    transition:all 0.3s;
+  }
+  .level:hover{
+    transform:scale(1.08);
+  }
+
+  .locked{
+    background:rgba(255,255,255,0.5);
+    color:#6b7280;
+    cursor:not-allowed;
+    box-shadow:none;
+    filter:grayscale(0.6);
+  }
+
+  /* posisi titik */
+  #lvl1{top:65%;left:10%;}
+  #lvl2{top:50%;left:30%;}
+  #lvl3{top:38%;left:55%;}
+  #lvl4{top:48%;left:78%;}
+
+  /* garis penghubung antar level */
+  .path{
+    position:absolute;
+    height:4px;
+    background:#bbf7d0;
+    transform-origin:left center;
+  }
+  #path1{top:67%;left:17%;width:16%;transform:rotate(-15deg);}
+  #path2{top:52%;left:37%;width:19%;transform:rotate(-10deg);}
+  #path3{top:44%;left:61%;width:18%;transform:rotate(20deg);}
+
+  /* tombol kembali */
+  .back{
+    position:absolute;
+    top:15px;
+    left:15px;
+    background:#bbf7d0;
+    color:#064e3b;
+    border:0;
+    padding:8px 14px;
+    border-radius:10px;
+    font-weight:600;
+    cursor:pointer;
+  }
+
+  /* efek transisi */
+  body.fade-out{opacity:0;transition:opacity .5s;}
+</style>
+</head>
+<body>
+  <button class="back" onclick="window.location.href='halaman1.html'">← Kembali</button>
+  <h1>🗺️ Peta Petualangan Hutan Aljabar 🌿</h1>
+
+  <div class="map">
+    <div id="path1" class="path"></div>
+    <div id="path2" class="path"></div>
+    <div id="path3" class="path"></div>
+
+    <div class="level" id="lvl1" onclick="go(1)">1</div>
+    <div class="level locked" id="lvl2" onclick="go(2)">2</div>
+    <div class="level locked" id="lvl3" onclick="go(3)">3</div>
+    <div class="level locked" id="lvl4" onclick="go(4)">4</div>
+  </div>
+
+<script>
+/* efek daun jatuh */
+for(let i=0;i<8;i++){
+  const leaf=document.createElement('div');
+  leaf.className='leaf';
+  leaf.style.left=Math.random()*100+'%';
+  leaf.style.animationDuration=8+Math.random()*6+'s';
+  leaf.style.animationDelay=Math.random()*5+'s';
+  document.body.appendChild(leaf);
+}
+
+/* cek level terbuka */
+let unlockedLevel = localStorage.getItem('unlockedLevel') || 1;
+for(let i=1;i<=unlockedLevel;i++){
+  document.getElementById('lvl'+i).classList.remove('locked');
+}
+
+/* fungsi pindah halaman */
+function go(level){
+  const el=document.getElementById('lvl'+level);
+  if(el.classList.contains('locked')){
+    alert('🔒 Level ini masih terkunci! Selesaikan level sebelumnya dulu ya 🌿');
+    return;
+  }
+  document.body.classList.add('fade-out');
+  setTimeout(()=>{
+    window.location.href=`index${level}.html`;
+  },500);
+}
+
+/* contoh: buka level berikutnya setelah selesai */
+function unlockNext(){
+  unlockedLevel++;
+  localStorage.setItem('unlockedLevel', unlockedLevel);
+}
+</script>
+</body>
+</html>
+<button onclick="history.back()" class="btn-kembali-sticky">⬅️ Kembali</button>
+
+<style>
+.btn-kembali-sticky {
+  position: fixed;
+  top: 20px;   /* jarak dari atas */
+  left: 20px;  /* jarak dari kiri */
+  background-color: #16a34a;
+  color: white;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+</style>

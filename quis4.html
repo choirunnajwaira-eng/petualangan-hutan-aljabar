@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kuis Aljabar</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #121212;
+      font-family: Arial, sans-serif;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    #bgVideo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;   /* supaya video tidak terpotong */
+  z-index: -1;         /* supaya video berada di belakang konten */
+}
+
+
+    .quiz-box {
+      background: #55e655;
+      padding: 30px;
+      width: 90%;
+      max-width: 600px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+      text-align: center;
+    }
+
+    .question {
+      font-size: 22px;
+      margin-bottom: 20px;
+      font-weight: bold;
+    }
+
+    .option {
+      background: #a1962f;
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .option:hover {
+      background: #3a3a3a;
+    }
+
+    .correct {
+      background: #1f7a1f !important;
+    }
+
+    .wrong {
+      background: #a31515 !important;
+    }
+    
+
+    #nextBtn {
+      margin-top: 20px;
+      padding: 12px 25px;
+      background: #6a5acd;
+      border: none;
+      border-radius: 10px;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      display: none;
+    }
+
+    #scoreBox {
+      font-size: 26px;
+      display: none;
+      margin-top: 30px;
+    }
+
+    #buttonArea {
+  margin-top: 20px;
+  text-align: center;
+}
+#questionImage {
+    display: block !important;
+    margin: 0 auto 15px auto !important;
+}
+
+.btn {
+  background: #4A6CF7;
+  color: white;
+  border: none;
+  padding: 12px 22px;
+  font-size: 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  margin: 8px;
+  width: 180px;
+  transition: 0.25s;
+}
+
+.btn:hover {
+  transform: scale(1.05);
+  background: #3656e2;
+}
+
+a {
+  text-decoration: none;
+}
+
+  </style>
+</head>
+<body>
+
+  <div class="quiz-box">
+      <img id="questionImage"
+     style="max-width: 200px; margin: 10px auto; display: none; border-radius: 10px;">
+    <div id="question" class="question">Loading...</div>
+    <div id="options"></div>
+    <button id="nextBtn" onclick="nextQuestion()">Next</button>
+    <div id="scoreBox"></div>
+    <div id="buttonArea"></div>
+  </div>
+  
+  <video autoplay muted loop id="bgVideo">
+  <source src="template quiz 1.mp4" type="video/mp4" />
+</video>
+
+  <script>
+    const quiz = [
+      {
+        q: "Bentuk aljabar yang tepat adalah ...",
+        img:"gambarsoal1.png",
+        options: ["3x + 2y", "x + y", "5xy", "x - y"],
+        answer: 0
+      },
+      {
+        q: "Bentuk aljabar yang tepat adalah ...",
+        img:"gambarsoal2.png",
+        options: ["4a + 6j", "3a + 2j", "10aj", "a + j"],
+        answer: 0
+      },
+      {
+        q: "Bentuk aljabar yang tepat adalah ...",
+        img:"gambarsoal3.png",
+        options: ["4b + 2", "b + m", "6bm", "1b + 5m"],
+        answer: 0
+      },
+      {
+        q: "Bentuk aljabar yang tepat adalah ...",
+        img:"gambarsoal4.png",
+        options: ["3x + 2", "3x + 6", "x + y", "6xy"],
+        answer: 1
+      },
+      {
+        q: "Bentuk aljabar yang tepat adalah ...",
+        img:"gambarsoal5.png",
+        options: ["2y + 7", "y + 7", "3y + 3", "7y"],
+        answer: 2
+      }
+    ];
+
+    let index = 0;
+    let score = 0;
+
+    function loadQuestion() {
+      const q = quiz[index];
+      document.getElementById("question").innerText = q.q;
+
+      const optBox = document.getElementById("options");
+      optBox.innerHTML = "";
+      const imgBox = document.getElementById("questionImage");
+
+    if (q.img) {
+        imgBox.src = q.img;
+        imgBox.style.display = "block";
+    } else {
+        imgBox.style.display = "none";
+    }
+
+      q.options.forEach((opt, i) => {
+        const div = document.createElement("div");
+        div.className = "option";
+        div.innerText = opt;
+        div.onclick = () => checkAnswer(div, i);
+        optBox.appendChild(div);
+      });
+    }
+
+    function checkAnswer(selected, i) {
+      const correctIndex = quiz[index].answer;
+
+      const options = document.querySelectorAll('.option');
+      options.forEach((opt, idx) => {
+        if (idx === correctIndex) opt.classList.add('correct');
+        else opt.classList.add('wrong');
+        opt.style.pointerEvents = 'none';
+      });
+
+      if (i === correctIndex) score++;
+
+      document.getElementById("nextBtn").style.display = "block";
+    }
+
+    function nextQuestion() {
+  // sembunyikan tombol next dulu
+  document.getElementById("nextBtn").style.display = "none";
+  // sembunyikan gambar
+  document.getElementById("questionImage").style.display = "none";
+
+  index++;
+
+  if (index < quiz.length) {
+    loadQuestion();
+  } else {
+    // tampilkan skor
+    document.getElementById("scoreBox").innerText =
+      `Kamu menjawab benar ${score} dari ${quiz.length} soal!`;
+    document.getElementById("scoreBox").style.display = "block";
+    document.getElementById("question").style.display = "none";
+    document.getElementById("options").style.display = "none";
+
+    // reset gambar supaya tidak muncul
+    const imgBox = document.getElementById("questionImage");
+    imgBox.style.display = "none";
+    imgBox.src = ""; // reset src HANYA DI SINI, setelah soal terakhir
+
+    const area = document.getElementById("buttonArea");
+
+    if (score <= 2) {
+        area.innerHTML = `
+            <a href="index1.html">
+              <button class="btn">Tonton Ulang Materi</button>
+            </a>
+            <br><br>
+            <button class= "btn" onclick="location.reload()">Mulai Ulang Kuis</button>
+        `;
+    } else {
+        area.innerHTML = `
+            <a href="lanjutkuis3.html">
+              <button class= "btn">Lanjut</button>
+            </a>
+        `;
+    }
+}
+    }
+
+
+    loadQuestion();
+  </script>
+
+</body>
+</html>

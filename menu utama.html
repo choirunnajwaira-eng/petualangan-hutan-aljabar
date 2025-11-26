@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Petualangan Hutan Aljabar</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: "Poppins", sans-serif;
+        height: 100vh;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    /* 🔥 Background hutan */
+    .bg {
+        width: 100%;
+        height: 100%;
+        background-image: url('forest.svg'); /* Ganti sesuai gambar kamu */
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        position: relative;
+
+        display: flex; /* supaya konten bisa center */
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+    }
+
+    /* 🔥 Overlay gelap (tidak menutup isi) */
+    .bg::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.45);
+        backdrop-filter: blur(1px);
+        z-index: 1;
+    }
+
+    /* Konten */
+    .container {
+        text-align: center;
+        max-width: 450px;
+        width: 100%;
+        position: relative;
+        z-index: 2; /* muncul di atas overlay */
+        color: white;
+        padding: 20px;
+    }
+
+    .title {
+        font-size: 32px;
+        font-weight: 700;
+        margin-bottom: 8px;
+        text-shadow: 0 3px 8px rgba(0,0,0,0.4);
+    }
+
+    .subtitle {
+        font-size: 15px;
+        margin-bottom: 20px;
+        opacity: 0.95;
+    }
+
+    .hero {
+        width: 70%;
+        max-width: 180px;
+        margin: 15px 0 25px;
+        border-radius: 12px;
+        filter: drop-shadow(0 4px 10px rgba(0,0,0,0.45));
+    }
+
+    .menu {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-top: 10px;
+    }
+
+    .btn {
+        background: #f4e4c1;
+        color: #3f5d2f;
+        padding: 13px 18px;
+        border-radius: 12px;
+        font-size: 17px;
+        text-decoration: none;
+        font-weight: 600;
+        box-shadow: 0 3px 8px rgba(0,0,0,0.25);
+        transition: 0.25s;
+    }
+
+    .btn:hover {
+        transform: scale(1.06);
+        background: #fff1d2;
+    }
+</style>
+
+</head>
+<body>
+
+<div class="bg">
+
+<div class="container">
+  <h1 class="title">Petualangan Hutan Aljabar</h1>
+  <p class="subtitle">Jelajahi hutan, pecahkan teka-teki aljabar, dan selesaikan misinya!</p>
+
+  <img src="forest.svg" class="hero" alt="Gambar Hutan">
+
+  <div class="menu">
+     <a href="panduan permainan.html" class="btn">Panduan Permainan</a>
+      <a href="index1.html" class="btn">Materi Aljabar</a>
+    <a href="kuis1.html" class="btn">Mulai Petualangan</a>
+   
+</div>
+
+</div>
+
+</body>
+</html>
