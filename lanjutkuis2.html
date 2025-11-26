@@ -6,32 +6,33 @@
   <title>Video Bertahap</title>
   <style>
     body, html {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: #a8e6cf; /* warna background saat video loading */
-    }
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #a8e6cf;
+}
 
-    video {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover; /* supaya video full layar tapi tetap proporsional */
-      z-index: 0;
-    }
-     @media (max-width: 600px) {
-            .video-container {
-                /* Membuat wadah lebih lebar di HP */
-                max-width: 95%; 
-                padding: 10px; 
-            }
-        }
+video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* default: PC full layar */
+  z-index: 0;
+}
+
+/* HP → videonya tidak dipotong, tetap proporsional */
+@media (max-width: 600px) {
+  video {
+    object-fit: contain; 
+    background-color: #a8e6cf; /* biar tidak ada warna hitam di belakang */
+  }
+}
 
 
     #btnLanjut {
@@ -100,3 +101,4 @@ btnLanjut.addEventListener('click', () => {
   </script>
 </body>
 </html>
+
