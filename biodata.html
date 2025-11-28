@@ -101,8 +101,8 @@
   }
 
   button:hover{
-    transform:translateY(-3px);
-    box-shadow:0 12px 25px rgba(16,163,74,0.3);
+     box-shadow:0 0 20px 6px rgba(16,185,129,0.6); /* cahaya hijau lembut */
+      transform:scale(1.05); /* sedikit membesar */
   }
 </style>
 </head>
@@ -125,11 +125,11 @@
       <label for="usia">Usia</label>
       <input type="number" id="usia" name="usia" min="10" max="50" placeholder="Contoh: 14" required>
 
-      <button type="submit">Lanjut ke Materi</button>
+      <button type="submit">Lanjut ke Menu Utama</button>
     </form>
   </div>
 
-  <audio id="ding" src="ding.mp3" preload="auto"></audio>
+  <audio id="ding" src="click.mp3" preload="auto"></audio>
 
   <script>
     const form = document.getElementById('biodataForm');
@@ -164,5 +164,6 @@
   cursor: pointer;
 }
 </style>
+
 
 
