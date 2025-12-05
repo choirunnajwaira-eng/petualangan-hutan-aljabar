@@ -4,6 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kuis Aljabar</title>
+
+  <!-- ======= MathJax Agar Equation Tampil ======= -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+  <!-- ============================================ -->
+
   <style>
     body {
       margin: 0;
@@ -28,7 +36,7 @@
 
 
     .quiz-box {
-      background: #55e655;
+      background: #9b7a0e;
       padding: 30px;
       width: 90%;
       max-width: 600px;
@@ -44,7 +52,7 @@
     }
 
     .option {
-      background: #a1962f;
+      background: #185a08;
       padding: 15px;
       margin: 10px 0;
       border-radius: 15px;
@@ -80,7 +88,7 @@
     #nextBtn {
       margin-top: 20px;
       padding: 12px 25px;
-      background: #6a5acd;
+      background: #185a08;
       border: none;
       border-radius: 10px;
       color: white;
@@ -101,7 +109,7 @@
 }
 
 .btn {
-  background: #4A6CF7;
+  background: #185a08;
   color: white;
   border: none;
   padding: 12px 22px;
@@ -139,27 +147,27 @@ a {
     const quiz = [
       {
         q: "Manakah yang merupakan unsur aljabar?",
-        options: ["5 + 7", "3x", "12 : 4", "7 - 2"],
+        options: ["\\(5 + 7\\)", "\\(3x\\)", "\\(12 : 4\\)", "\\(7 - 2\\)"],
         answer: 1
       },
       {
-        q: "Yang termasuk koefisien pada bentuk 7y adalah ...",
-        options: ["7", "y", "7y", "14"],
+        q: "Yang termasuk koefisien pada bentuk \\(7y\\) adalah ...",
+        options: ["\\(7\\)", "\\(y\\)", "\\(7y\\)", "\\(14\\)"],
         answer: 0
       },
       {
-        q: "Yang disebut variabel pada bentuk 4a + 9 adalah ...",
-        options: ["4", "a", "9", "4a"],
+        q: "Yang disebut variabel pada bentuk \\(4a + 9\\) adalah ...",
+        options: ["\\(4\\)", "\\(a\\)", "\\(9\\)", "\\(4a\\)"],
         answer: 1
       },
       {
-        q: "Pada bentuk aljabar 6m + 8, bilangan 8 adalah ...",
+        q: "Pada bentuk aljabar \\(6m + 8\\), bilangan \\(8\\) adalah ...",
         options: ["Variabel", "Koefisien", "Konstanta", "Suku"],
         answer: 2
       },
       {
         q: "Manakah yang termasuk suku sejenis?",
-        options: ["3x dan 5y", "4p dan 9p", "7a dan 7", "2x dan 2"],
+        options: ["\\(3x\\) dan \\(5y\\)", "\\(4p\\) dan \\(9p\\)", "\\(7a\\) dan \\(7\\)", "\\(2x\\) dan \\(2\\)"],
         answer: 1
       }
     ];
@@ -181,6 +189,7 @@ a {
         div.onclick = () => checkAnswer(div, i);
         optBox.appendChild(div);
       });
+       MathJax.typeset();
     }
 
     function checkAnswer(selected, i) {
