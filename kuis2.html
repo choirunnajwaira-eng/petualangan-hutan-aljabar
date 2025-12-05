@@ -4,11 +4,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kuis Aljabar</title>
+
+  <!-- ======= MathJax Agar Equation Tampil ======= -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+  <!-- ============================================ -->
+
   <style>
     body {
       margin: 0;
       padding: 0;
-      background: #121212;
+      background:url("latarkuis2.png") no-repeat center center fixed;
       font-family: Arial, sans-serif;
       color: white;
       display: flex;
@@ -17,18 +25,17 @@
       min-height: 100vh;
     }
     #bgVideo {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  object-fit: cover;   /* supaya video tidak terpotong */
-  z-index: -1;         /* supaya video berada di belakang konten */
-}
-
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      z-index: -1;
+    }
 
     .quiz-box {
-      background: #55e655;
+      background: #9b7a0e;
       padding: 30px;
       width: 90%;
       max-width: 600px;
@@ -44,7 +51,7 @@
     }
 
     .option {
-      background: #a1962f;
+      background: #185a08;
       padding: 15px;
       margin: 10px 0;
       border-radius: 15px;
@@ -63,24 +70,11 @@
     .wrong {
       background: #a31515 !important;
     }
-    body {
-  margin: 0;
-  padding: 0;
-  background: url("latarkuis2.png") no-repeat center center fixed;
-  background-size: cover;
-  font-family: Arial, sans-serif;
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-}
-    
 
     #nextBtn {
       margin-top: 20px;
       padding: 12px 25px;
-      background: #6a5acd;
+      background: #185a08;
       border: none;
       border-radius: 10px;
       color: white;
@@ -96,32 +90,27 @@
     }
 
     #buttonArea {
-  margin-top: 20px;
-  text-align: center;
-}
+      margin-top: 20px;
+      text-align: center;
+    }
 
-.btn {
-  background: #4A6CF7;
-  color: white;
-  border: none;
-  padding: 12px 22px;
-  font-size: 16px;
-  border-radius: 10px;
-  cursor: pointer;
-  margin: 8px;
-  width: 180px;
-  transition: 0.25s;
-}
+    .btn {
+      background: #185a08;
+      color: white;
+      border: none;
+      padding: 12px 22px;
+      font-size: 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      margin: 8px;
+      width: 180px;
+      transition: 0.25s;
+    }
 
-.btn:hover {
-  transform: scale(1.05);
-  background: #3656e2;
-}
-
-a {
-  text-decoration: none;
-}
-
+    .btn:hover {
+      box-shadow: 0 0 20px 6px rgba(16,185,129,0.6);
+      transform: scale(1.05);
+    }
   </style>
 </head>
 <body>
@@ -134,132 +123,165 @@ a {
     <div id="buttonArea"></div>
   </div>
 
+ <script>
+  const quiz = [
+    {
+      q: "Sederhanakan: \\(3x + 5x = \\ldots\\)",
+      options: ["\\(8x\\)", "\\(15x\\)", "\\(3x^2\\)", "\\(5x^2\\)"],
+      answer: 0,
+      type: "mc"
+    },
+    {
+      q: "Jika \\(x = 4\\), nilai dari \\(2x + 3\\) adalah \\(...\\)",
+      options: ["\\(11\\)", "\\(10\\)", "\\(12\\)", "\\(9\\)"],
+      answer: 0,
+      type: "mc"
+    },
+    {
+      q: "Bentuk aljabar dari 'dua bilangan \\(n\\) ditambah lima' adalah \\(...\\)",
+      options: ["\\(2 + n + 5\\)", "\\(2n + 5\\)", "\\(n + 5n\\)", "\\(2 + 5n\\)"],
+      answer: 1,
+      type: "mc"
+    },
+    {
+      q: "Sederhanakan: \\(7y - 2y = \\ldots\\)",
+      options: ["\\(5y\\)", "\\(9y\\)", "\\(5y - 4\\)", "\\(7y + 2\\)"],
+      answer: 0,
+      type: "mc"
+    },
+    {
+      q: "Jika \\(y = 3\\), nilai dari \\(y + 7\\) adalah \\(...\\)",
+      options: ["\\(10\\)", "\\(11\\)", "\\(9\\)", "\\(12\\)"],
+      answer: 0,
+      type: "mc"
+    },
 
-  <script>
-    const quiz = [
-  {
-    q: "Sederhanakan: 3x + 5x = ...",
-    options: ["8x", "15x", "3x²", "5x²"],
-    answer: 0
-  },
-  {
-    q: "Jika x = 4, nilai dari 2x + 3 adalah ...",
-    options: ["11", "10", "12", "9"],
-    answer: 0
-  },
-  {
-    q: "Bentuk aljabar dari 'dua bilangan n ditambah lima' adalah ...",
-    options: ["2 + n + 5", "2n + 5", "n + 5n", "2 + 5n"],
-    answer: 1
-  },
-  {
-    q: "Sederhanakan: 7y - 2y = ...",
-    options: ["5y", "9y", "5y - 4", "7y + 2"],
-    answer: 0
-  },
-  {
-    q: "Jika y = 3, nilai dari y + 7 adalah ...",
-    options: ["10", "11", "9", "12"],
-    answer: 0
-  },
-  {
-    q: "Sederhanakan: 5a + 3b - 2a + b = ...",
-    options: ["3a + 4b", "7ab", "5a + 4b", "3a + 2b"],
-    answer: 0
-  },
-  {
-    q: "Jika z = 5, nilai dari z + 6 - 3 adalah ...",
-    options: ["8", "9", "10", "7"],
-    answer: 0
-  },
-  {
-    q: "Sederhanakan: 6p - 3p + 2q - q = ...",
-    options: ["3p + q", "3p + 2q", "6p + q", "3p - q"],
-    answer: 0
-  },
-  {
-    q: "Bentuk aljabar dari 'suatu bilangan t dikurangi tiga' adalah ...",
-    options: ["t - 3", "3 - t", "t + 3", "t - 1"],
-    answer: 0
-  },
-  {
-    q: "Sederhanakan: 4m + 2 - 2m + 5 = ...",
-    options: ["2m + 7", "6m + 7", "2m + 3", "2m + 10"],
-    answer: 0
-  }
-];
+    /* ======== Nomor 6–10: Isian Singkat ======== */
+    {
+      q: "Isikan jawaban: Sederhanakan \\(5a + 3b - 2a + b = \\ldots\\)",
+      answerText: "3a+4b",
+      type: "input"
+    },
+    {
+      q: "Isikan jawaban: Jika \\(z = 5\\), hitung nilai dari \\(z + 6 - 3\\)",
+      answerText: "8",
+      type: "input"
+    },
+    {
+      q: "Isikan jawaban: Sederhanakan \\(6p - 3p + 2q - q = \\ldots\\)",
+      answerText: "3p+q",
+      type: "input"
+    },
+    {
+      q: "Isikan jawaban: Bentuk aljabar dari 'suatu bilangan \\(t\\) dikurangi tiga'",
+      answerText: "t-3",
+      type: "input"
+    },
+    {
+      q: "Isikan jawaban: Sederhanakan \\(4m + 2 - 2m + 5 = \\ldots\\)",
+      answerText: "2m+7",
+      type: "input"
+    }
+  ];
 
-    let index = 0;
-    let score = 0;
+  let index = 0;
+  let score = 0;
 
-    function loadQuestion() {
-      const q = quiz[index];
-      document.getElementById("question").innerText = q.q;
+  function loadQuestion() {
+    const q = quiz[index];
+    document.getElementById("question").innerHTML = q.q;
 
-      const optBox = document.getElementById("options");
-      optBox.innerHTML = "";
+    const optBox = document.getElementById("options");
+    optBox.innerHTML = "";
 
+    if (q.type === "mc") {
       q.options.forEach((opt, i) => {
         const div = document.createElement("div");
         div.className = "option";
-        div.innerText = opt;
-        div.onclick = () => checkAnswer(div, i);
+        div.innerHTML = opt;
+        div.onclick = () => checkMC(div, i);
         optBox.appendChild(div);
       });
-    }
-
-    function checkAnswer(selected, i) {
-      const correctIndex = quiz[index].answer;
-
-      const options = document.querySelectorAll('.option');
-      options.forEach((opt, idx) => {
-        if (idx === correctIndex) opt.classList.add('correct');
-        else opt.classList.add('wrong');
-        opt.style.pointerEvents = 'none';
-      });
-
-      if (i === correctIndex) score++;
-
-      document.getElementById("nextBtn").style.display = "block";
-    }
-
-    function nextQuestion() {
-      index++;
-      document.getElementById("nextBtn").style.display = "none";
-
-      if (index < quiz.length) {
-        loadQuestion();
-      } else {
-        document.getElementById("scoreBox").innerText =
-          `Kamu menjawab benar ${score} dari ${quiz.length} soal!`;
-        document.getElementById("scoreBox").style.display = "block";
-        document.getElementById("question").style.display = "none";
-        document.getElementById("options").style.display = "none";
-
-         // === BAGIAN TAMBAHAN UNTUK TOMBOL ===
-    const area = document.getElementById("buttonArea");
-
-    if (score <= 6) {
-        area.innerHTML = `
-            <a href="index1.html">
-              <button class="btn">Tonton Ulang Materi</button>
-            </a>
-            <br><br>
-            <button class= "btn" onclick="location.reload()">Mulai Ulang Kuis</button>
-        `;
     } else {
-        area.innerHTML = `
-            <a href="akhirkuis.html">
-              <button class= "btn">Lanjut</button>
-            </a>
-        `;
+      optBox.innerHTML = `
+        <input id="shortAnswer" 
+               type="text" 
+               placeholder="Ketik jawaban..."
+               style="
+                 width: 80%;
+                 padding: 12px;
+                 border-radius: 10px;
+                 border: none;
+                 font-size: 18px;">
+        <br><br>
+        <button class="btn" onclick="checkInput()">Cek Jawaban</button>
+      `;
     }
+
+    MathJax.typeset();
+  }
+
+  function checkMC(selected, i) {
+    const correctIndex = quiz[index].answer;
+
+    const options = document.querySelectorAll('.option');
+    options.forEach((opt, idx) => {
+      if (idx === correctIndex) opt.classList.add('correct');
+      else opt.classList.add('wrong');
+      opt.style.pointerEvents = 'none';
+    });
+
+    if (i === correctIndex) score++;
+
+    document.getElementById("nextBtn").style.display = "block";
+  }
+
+  function checkInput() {
+    const user = document.getElementById("shortAnswer").value.trim().replace(/\s/g, "").toLowerCase();
+    const correct = quiz[index].answerText.replace(/\s/g, "").toLowerCase();
+
+    if (user === correct) {
+      alert("Jawaban benar!");
+      score++;
+    } else {
+      alert("Jawaban salah!");
+    }
+
+    document.getElementById("nextBtn").style.display = "block";
+  }
+
+  function nextQuestion() {
+    index++;
+    document.getElementById("nextBtn").style.display = "none";
+
+    if (index < quiz.length) {
+      loadQuestion();
+    } else {
+      document.getElementById("scoreBox").innerText =
+        `Kamu menjawab benar ${score} dari ${quiz.length} soal!`;
+      document.getElementById("scoreBox").style.display = "block";
+      document.getElementById("question").style.display = "none";
+      document.getElementById("options").style.display = "none";
+
+      const area = document.getElementById("buttonArea");
+
+      if (score <= 6) {
+        area.innerHTML = `
+          <a href="index1.html">
+            <button class="btn">Tonton Ulang Materi</button>
+          </a>
+          <br><br>
+          <button class="btn" onclick="location.reload()">Mulai Ulang Kuis</button>
+        `;
+      } else {
+        area.innerHTML = `
+          <a href="akhirkuis.html">
+            <button class="btn">Lanjut</button>
+          </a>
+        `;
       }
     }
+  }
 
-    loadQuestion();
-  </script>
-
-</body>
-</html>
-
+  loadQuestion();
+</script>
